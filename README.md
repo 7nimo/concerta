@@ -1,9 +1,11 @@
+### Info
+
 Concerta is my personal financial manager app, over-engineered, 
 and used mainly as a learning tool, to teach myself interesting technologies.
 	
 It takes CSV data from bank statements and translates it into charts to visualise income and expenses over time, with many ideas still to come.
 
-# Running locally
+### Running locally
 
 1. Move env files 
 mv .example.env .env
