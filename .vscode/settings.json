@@ -1,0 +1,26 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.validate.enable": true,
+  "files.eol": "\n",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.validate": [
+    "json",
+    "jsonc",
+    "yml",
+    "yaml",
+    "html"
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "eslint.packageManager": "yarn",
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  }
+}

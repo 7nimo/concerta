@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  ui:
+    container_name: b_ui
+    build:
+      context: ./packages/ui
+    volumes:
+      - ./packages/ui:/app
+      - /app/.yarn
+      - /app/node_modules
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    working_dir: /app
+    command: sh -c "yarn && yarn dev --host"
+
+  api:
+    container_name: b_api
+    build:
+      context: ./packages/api
+      target: ${NODE_ENV}
+    volumes:
+      - ./packages/api:/app
+      - /app/.yarn
+      - /app/node_modules
+    ports:
+      - "${SERVER_PORT}:4200"
+      - "9229:9229"
+    working_dir: /app
+    restart: unless-stopped
+    depends_on:
+      - b_db
+    command: sh -c "yarn && yarn start:debug"
+ 
+  db:
+    container_name: b_db
+    image: postgres:14.1
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PG_DATA: /var/lib/postgresql/b_db
+    volumes:
+      - db_data:/var/lib/postgresql/b_db
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    restart: unless-stopped
+
+volumes:
+  db_data: {}
+  
